@@ -36,7 +36,7 @@ export const signOut = () => dispatch => {
     axios
         .get('/api/auth/logout')
         .then(res => {
-            console.log(res);
+            // console.log(res);
             dispatch({ type: USER_SIGN_OFF });
 
         })

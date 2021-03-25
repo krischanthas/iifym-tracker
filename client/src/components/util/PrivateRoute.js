@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from '../../pages/Profile';
 import Login from '../../pages/Login';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ auth }) => {
     const authorized = auth.isAuthUser;

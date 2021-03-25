@@ -21,7 +21,6 @@ passport.use(new JwtStrategy(option, (payload, done) => {
     console.log(payload);
     User.findOne({ _id: payload.sub })
         .then(user => {
-            console.log(user);
             return (user) ? done(null, user) : done(null, false);
         })
         .catch(err => done(err, null));

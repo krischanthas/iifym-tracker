@@ -9,7 +9,7 @@ module.exports.getUserProfile = async (req, res) => {
         if (!user) return res.status(400).json({ message: 'No user found, please sign in.' });
 
         // fetch user's logs
-        const logs = await LogModel.find({ userId: req.user._id }).sort({ createdAt: -1 });
+        const logs = await LogModel.find({ userId: req.user._id }).sort({ createdAt: 1 });
         if (!logs) return res.status(400).json({ message: 'No logs found' });
 
         return res.status(200).json({

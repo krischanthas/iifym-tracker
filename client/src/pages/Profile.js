@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import NavBar from "../components/layouts/NavBar";
+import React, { useState } from 'react';
 
-import { getCurrentUserProfile } from '../redux/actions/userActions';
-import { signOut } from '../redux/actions/authActions';
+// components
+import DisplayLogs from "../components/layouts/DisplayLogs";
+import CreateLog from '../components/CreateLog';
 
-const Profile = ({ getCurrentUserProfile, signOut, profile }) => {
-    let history = useHistory();
-    const [logs, setLogs] = useState([]);
+import { Container, Grid, Button } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+    button: {
+        width: "100%",
+        height: "4rem",
+        border: "none",
+        borderRadius: "3px",
+        backgroundColor: "rgba(218, 218, 218, 0.5)"
+    }
+})
 
-    useEffect(() => {
-        getCurrentUserProfile();
-    }, []);
+const Profile = () => {
+    const classes = useStyles();
+    const [openDialog, setOpenDialog] = useState(false);
 
-    useEffect(() => {
-        setLogs(profile.logs);
-        console.log(logs);
-    }, [profile.logs])
-
+    const handleOpenDialog = (openDialog) => {
+        setOpenDialog(true);
+    }
+    const handleOnClose = () => {
+        setOpenDialog(false);
+    }
     return (
-        <div className="profile">
-            <NavBar />
-            <div className="btn">
-                <button onClick={() => signOut()} >Sign Out</button>
-            </div>
-        </div>
+        <Container>
+            <Grid container spacing={2}>
+                <Grid item xs={12} >
+                    <Button className={classes.button} onClick={() => handleOpenDialog()}><AddIcon /></Button>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <CreateLog dialog={openDialog} handleOnClose={handleOnClose} />
+
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <DisplayLogs />
+                </Grid>
+
+            </Grid>
+        </Container>
+
     )
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    profile: state.profile
-})
-export default connect(mapStateToProps, { getCurrentUserProfile, signOut })(Profile);
+export default Profile;

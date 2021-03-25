@@ -1,72 +1,79 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Box, FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { addFoodAction } from '../redux/actions/foodAction';
+import { Dialog, DialogTitle } from '@material-ui/core';
 
-// apollo client
-import { useMutation, gql } from '@apollo/client';
+const useStyles = makeStyles({
 
-
-
-const CreateLog = () => {
-    let history = useHistory();
-
-    const [logType, setType] = useState('');
-    const [calories, setCalories] = useState('');
-    const [totalFat, setFat] = useState('');
-    const [totalCarbohydrate, setCarb] = useState('');
-    const [totalProtein, setProtein] = useState('');
-
-    // sanitize these!!
-    const variables = {
-        logType,
-        calories: parseInt(calories),
-        totalFat: parseInt(totalFat),
-        totalCarbohydrate: parseInt(totalCarbohydrate),
-        totalProtein: parseInt(totalProtein)
-    };
-
-    const CREATE_LOG = gql`  
-    mutation ($logType: String!, $calories: Int!, $totalFat: Int!, $totalCarbohydrate: Int!, $totalProtein: Int!) {
-        createLog(logInput: { logType: $logType, calories: $calories, totalFat: $totalFat, totalCarbohydrate: $totalCarbohydrate, totalProtein: $totalProtein }) {
-            userId,
-            logType,
-            calories,
-            totalFat,
-            totalCarbohydrate,
-            totalProtein
-        }
-    }`;
-    const [createLog, { error, loading, data }] = useMutation(CREATE_LOG);
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        createLog({ variables });
-        history.push('/profile');
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        padding: "1rem 4rem",
+        width: "100%",
     }
+});
 
+const CreateLog = ({ dialog, handleOnClose }) => {
+    // user inputs
+    const [itemName, setItem] = useState('');
+    const [description, setDescription] = useState('');
+    const [servingSize, setServing] = useState('');
+    const [calories, setCalories] = useState('');
+    const [fat, setFat] = useState('');
+    const [carbs, setCarb] = useState('');
+    const [protein, setProtein] = useState('');
+
+
+
+    const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addFoodAction({ itemName, description, servingSize, calories, fat, carbs, protein }))
+        handleOnClose();
+    }
     return (
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <div className="field">
-                    <input type="text" name="logType" value={logType} onChange={(e) => setType(e.target.value)} placeholder="Breakfast, lunch, dinner or snack" autoComplete="off" />
-                </div>
-                <div className="field">
-                    <input type="text" name="calories" value={calories} onChange={(e) => setCalories(e.target.value)} placeholder="Enter calories" autoComplete="off" />
-                </div>
-                <div className="field">
-                    <input type="text" name="totalFat" value={totalFat} onChange={(e) => setFat(e.target.value)} placeholder="Enter fat (g)" autoComplete="off" />
-                </div>
-                <div className="field">
-                    <input type="text" name="totalCarbohydrate" value={totalCarbohydrate} onChange={(e) => setCarb(e.target.value)} placeholder="Enter carbohydrate (g)" autoComplete="off" />
+        <Dialog open={dialog} onClose={handleOnClose} fullWidth={true}>
+            <DialogTitle>Add custom item</DialogTitle>
+            <form className={classes.form} onSubmit={handleFormSubmit}>
+                <FormControl>
+                    <InputLabel htmlFor="itemName" >Item</InputLabel>
+                    <Input aria-describedby="Item" onChange={(e) => setItem(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="descrInput">Description</InputLabel>
+                    <Input aris-describedby="Description" onChange={(e) => setDescription(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="servingSize">Serving Size</InputLabel>
+                    <Input aris-describedby="Serving" onChange={(e) => setServing(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="caloriesInput">Calories</InputLabel>
+                    <Input aris-describedby="Calories" onChange={(e) => setCalories(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="fat">Total Fat</InputLabel>
+                    <Input aris-describedby="Total Fat" onChange={(e) => setFat(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="carbs">Total Carbohydrates</InputLabel>
+                    <Input aris-describedby="Total Carbohydrates" onChange={(e) => setCarb(e.target.value)} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="protein">Total Protein</InputLabel>
+                    <Input aris-describedby="Total Protein" onChange={(e) => setProtein(e.target.value)} />
+                </FormControl>
+                <Box mt={3}>
+                    <Button type="submit" variant="contained" color="primary" fullWidth={true}>Add</Button>
 
-                </div>
-                <div className="field">
-                    <input type="text" name="totalProtein" value={totalProtein} onChange={(e) => setProtein(e.target.value)} placeholder="Enter protein (g)" autoComplete="off" />
-
-                </div>
-                <button type="submit" className="btn-primary">Add</button>
+                </Box>
             </form>
-        </div>
+        </Dialog>
     )
-
 
 }
 

@@ -13,6 +13,9 @@ const authRoutes = require('./routes/authRoutes');
 const foodLogRoutes = require('./routes/foodLogRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+const { searchFood, searchFoodNutrients, searchBrandedFoodItem, } = require('./controller/nutritionixController');
+
+
 dotenv.config();
 
 // connect to db
@@ -35,5 +38,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/food', foodLogRoutes);
 app.use('/api/user', userRoutes);
 
+// nutritionix api routes
+app.use('/api/nutritionix/search', searchFood);
+app.use('/api/nutritionix/nutrients', searchFoodNutrients);
+app.use('/api/nutritionix/brand', searchBrandedFoodItem);
 
-app.listen(4000, () => console.log('Server is running...'))
+app.listen(4000, () => console.log('Server is running...'));

@@ -1,20 +1,4 @@
 const FoodLogModel = require('../models/FoodLogModel');
-const callNutritionix = require('../keys/nutritionix');
-
-/**
- * Search the Nutritionix API for nutrition facts
- * @param {*} req body holds searched item to run against the nutritionix api 
- * @param {*} res returns the food item(s) found if successful or error message
- */
-module.exports.searchFood = async (req, res) => {
-    callNutritionix.post('/', {
-        query: `${req.body.searchedFood}`,
-        timezone: 'US/Eastern'
-    }).then((results) => {
-        return res.status(200).json({ data: results.data.foods });
-    }).catch((err) => console.log(err));
-}
-
 
 /**
  * Takes incoming request and adds to food log
@@ -23,7 +7,7 @@ module.exports.searchFood = async (req, res) => {
  */
 module.exports.addFood = async (req, res) => {
     const food = new FoodLogModel({
-        itemName: req.body.name,
+        itemName: req.body.itemName,
         description: req.body.description,
         servingSize: req.body.servingSize,
         calories: req.body.calories,
@@ -35,7 +19,7 @@ module.exports.addFood = async (req, res) => {
 
     try {
         const foodToSave = await food.save();
-        res.status(201).json({ data: foodToSave, message: 'food added!' });
+        return res.status(201).json({ foodAdded: foodToSave, message: 'food added!' });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: err });

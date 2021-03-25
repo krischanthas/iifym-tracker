@@ -1,4 +1,4 @@
-import { USER_LOGS_FETCHED } from '../types';
+import { USER_LOGS_FETCHED, USER_LOGGED_FOOD } from '../types';
 
 const initialState = {
     profile: {
@@ -12,6 +12,11 @@ export default function (state = initialState, action) {
         case USER_LOGS_FETCHED:
             return {
                 logs: action.payload
+            }
+        case USER_LOGGED_FOOD:
+            return {
+                ...state,
+                logs: [...state.logs, action.payload]
             }
         default:
             return {
