@@ -1,4 +1,4 @@
-import { USER_LOGS_FETCHED, USER_LOGGED_FOOD } from '../types';
+import { USER_LOGS_FETCHED, USER_LOGGED_FOOD, LOG_ITEM_REMOVED } from '../types';
 
 const initialState = {
     profile: {
@@ -17,6 +17,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 logs: [...state.logs, action.payload]
+            }
+        case LOG_ITEM_REMOVED:
+            return {
+                ...state,
+                logs: state.logs.filter(log => log._id !== action.payload)
             }
         default:
             return {

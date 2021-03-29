@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box, FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { addFoodAction } from '../redux/actions/foodAction';
+import { addFoodAction } from '../redux/actions/foodActions';
 import { Dialog, DialogTitle } from '@material-ui/core';
 
 const useStyles = makeStyles({

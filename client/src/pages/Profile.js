@@ -22,7 +22,7 @@ const Profile = () => {
     const classes = useStyles();
     const [openDialog, setOpenDialog] = useState(false);
 
-    const handleOpenDialog = (openDialog) => {
+    const handleOpenDialog = () => {
         setOpenDialog(true);
     }
     const handleOnClose = () => {

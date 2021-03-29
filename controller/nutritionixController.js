@@ -17,7 +17,7 @@ module.exports.searchFoodNutrients = (req, res) => {
     callNutritionixNutrientEndpoint.post('/', {
         query: searchedFood
     }).then((results) => {
-        return res.status(200).json({ nutritionixNutrientsData: results.data });
+        return res.status(200).json({ nutritionixNutrientsData: results.data.foods[0] });
     }).catch((err) => console.log(err));
 
 }
