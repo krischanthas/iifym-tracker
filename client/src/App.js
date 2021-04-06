@@ -14,7 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 
-import Statistics from './pages/Statistics';
+import Goals from './pages/Goals';
 import Exercise from './pages/Exercise';
 import MealHistory from './pages/MealHistory';
 import PrivateRoute from './components/util/PrivateRoute';
@@ -30,8 +30,8 @@ store.dispatch(getCurrentUserProfile());
 const App = () => {
   return (
     <div className="App">
-      <NavBar />
       <Provider store={store}>
+        <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
@@ -40,7 +40,7 @@ const App = () => {
           <Route path="/nix" component={SearchNutritionix} />
           <Route path="/exercise" component={Exercise} />
           <Route path="/history" component={MealHistory} />
-          <Route path="/statistics" component={Statistics} />
+          <Route path="/goals" component={Goals} />
         </Switch>
       </Provider>
     </div>

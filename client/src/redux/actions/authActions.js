@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { USER_SIGN_ON, USER_SIGN_OFF } from '../types';
+import { USER_SIGN_OFF } from '../types';
 import { getCurrentUserProfile } from './userActions';
 
 export const login = (userInput) => dispatch => {
@@ -10,7 +10,6 @@ export const login = (userInput) => dispatch => {
             password: userInput.password
         })
         .then(res => {
-            // dispatch({ type: USER_SIGN_ON, payload: res.data.credentials });
             dispatch(getCurrentUserProfile());
         })
         .catch(err => console.log(err));
@@ -36,7 +35,6 @@ export const signOut = () => dispatch => {
     axios
         .get('/api/auth/logout')
         .then(res => {
-            // console.log(res);
             dispatch({ type: USER_SIGN_OFF });
 
         })

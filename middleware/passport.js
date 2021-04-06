@@ -18,7 +18,7 @@ const option = {
     // algorithms: ['RS256']
 }
 passport.use(new JwtStrategy(option, (payload, done) => {
-    console.log(payload);
+    // console.log(payload);
     User.findOne({ _id: payload.sub })
         .then(user => {
             return (user) ? done(null, user) : done(null, false);

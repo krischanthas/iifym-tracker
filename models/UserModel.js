@@ -20,6 +20,13 @@ const userSchema = new Schema({
     birthDate: {
         type: Date
     },
+    goals: {
+        nutrition: {
+            fat: { type: Number },
+            carbs: { type: Number },
+            protein: { type: Number }
+        }
+    },
     token: {
         type: String
     }

@@ -23,6 +23,7 @@ export const addFoodAction = (foodInput) => dispatch => {
         .post('/api/food/', foodInput)
         .then(res => {
             dispatch({ type: USER_LOGGED_FOOD, payload: res.data.foodAdded });
+
         })
         .catch(err => console.log(err));
 }
