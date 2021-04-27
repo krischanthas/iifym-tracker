@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom';
 
 
-const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
+const RedirectLogin = ({ component: Component, authenticated, ...rest }) => {
     const auth = useSelector((state) => state.auth);
 
     return (<Route
         {...rest}
         render={(props) =>
-            auth.isAuthUser === true ? <Redirect to="/profile" /> : <Component {...props} />
+            auth.isAuthUser === false ? <Redirect to="/login" /> : <Component {...props} />
         }
     />)
 };
 
-export default (PrivateRoute);
+export default (RedirectLogin);

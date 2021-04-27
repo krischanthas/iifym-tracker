@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Login() {
+    const history = useHistory();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +15,7 @@ export default function Login() {
         axios
             .post('http://localhost:4000/api/auth/register', { name, email, password, birthDate })
             .then(res => {
-                console.log(res);
+                history.push('/login');
             })
             .catch(err => console.log(err));
     }

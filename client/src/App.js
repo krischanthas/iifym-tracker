@@ -19,6 +19,8 @@ import Goals from './pages/Goals';
 import Exercise from './pages/Exercise';
 import MealHistory from './pages/MealHistory';
 import PrivateRoute from './components/util/PrivateRoute';
+import RedirectLogin from './components/util/RedirectLogin';
+
 import SearchNutritionix from './pages/SearchNutritionix';
 
 // redux
@@ -36,9 +38,22 @@ const App = () => {
         {location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/register" ? <NavBar /> : ''}
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/register" component={Register} />
-          <PrivateRoute path="/login" component={Login} />
-          <PrivateRoute path="/profile" component={Profile} />
+          {/* <Route path="/register" component={Register} /> */}
+          <PrivateRoute
+            exact
+            path="/register"
+            component={Register}
+          />
+          <PrivateRoute
+            exact
+            path="/login"
+            component={Login}
+          />
+          <RedirectLogin
+            exact
+            path="/profile"
+            component={Profile}
+          />
           <Route path="/nix" component={SearchNutritionix} />
           <Route path="/exercise" component={Exercise} />
           <Route path="/history" component={MealHistory} />
