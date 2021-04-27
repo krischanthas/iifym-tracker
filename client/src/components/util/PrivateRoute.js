@@ -1,16 +1,16 @@
 import React from 'react';
 import Profile from '../../pages/Profile';
 import Login from '../../pages/Login';
-import { connect } from 'react-redux'
-// import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux'
+// import { useHistory } from 'react-router-dom';
 
-const PrivateRoute = ({ auth }) => {
+const PrivateRoute = () => {
+    // const history = useHistory();
+    const auth = useSelector((state) => state.auth);
     const authorized = auth.isAuthUser;
-    if (authorized) return <Profile />
-    else return <Login />;
+    if (!authorized) return <Login />;
+    else return <Profile />;
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-export default connect(mapStateToProps, null)(PrivateRoute);
+
+export default (PrivateRoute);

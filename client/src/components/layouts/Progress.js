@@ -93,7 +93,7 @@ const Progress = () => {
         )
     } else {
         return (
-            <Paper className={classes.paper}>
+            <Paper className={classes.bgPrimary}>
                 <List>
                     <ListItem elevation={3}>
                         <ListItemText primary="No Logs available" />

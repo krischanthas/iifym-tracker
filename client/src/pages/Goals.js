@@ -58,20 +58,20 @@ const Goals = () => {
     if (editMode) {
         return (
             <Container>
-                <Grid container xs={12} spacing={2}>
+                <Grid container spacing={2}>
                     <form className="form" onSubmit={handleOnSubmit}>
                         <button onClick={onEditClick} className="btn-primary">Cancel</button>
 
                         <Grid item xs={12}>
-                            <input type="text" name="fat" placeholder="Fat" onChange={(e) => setFat(e.target.value)} />
+                            <input autoComplete="off" type="text" name="fat" placeholder="Fat" onChange={(e) => setFat(e.target.value)} />
 
                         </Grid>
                         <Grid item xs={12}>
-                            <input type="text" name="carbs" placeholder="Carbohydrates" onChange={(e) => setCarbs(e.target.value)} />
+                            <input autoComplete="off" type="text" name="carbs" placeholder="Carbohydrates" onChange={(e) => setCarbs(e.target.value)} />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <input type="text" name="protein" placeholder="Protein" onChange={(e) => setProtein(e.target.value)} />
+                            <input autoComplete="off" type="text" name="protein" placeholder="Protein" onChange={(e) => setProtein(e.target.value)} />
                         </Grid>
                         <Grid item xs={12}>
                             <button className="btn-primary" type="submit">Save</button>

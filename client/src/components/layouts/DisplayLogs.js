@@ -40,11 +40,11 @@ const DisplayLogs = () => {
         if (logs.length > 0) {
             return (
                 <Paper className={classes.bgPrimary}>
-                    <List className={classes.list}>
+                    <List>
 
                         {logs.map((log, indx) => (
                             <ListItem key={indx} elevation={3}  >
-                                <Grid container xs={12}>
+                                <Grid container>
                                     <Grid item container xs={10} direction="row">
                                         <Grid item xs={10}>
                                             <ListItemText
@@ -73,7 +73,7 @@ const DisplayLogs = () => {
             )
         } else {
             return (
-                <Paper>
+                <Paper className={classes.bgPrimary}>
                     <List>
                         <ListItem elevation={3} >
                             <ListItemText
@@ -86,7 +86,7 @@ const DisplayLogs = () => {
         }
     } else {
         return (
-            <Paper>
+            <Paper className={classes.bgPrimary}>
                 <List>
                     <ListItem elevation={3} >
                         <ListItemText

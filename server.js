@@ -12,6 +12,7 @@ const passport = require('./middleware/passport');
 const authRoutes = require('./routes/authRoutes');
 const foodLogRoutes = require('./routes/foodLogRoutes');
 const userRoutes = require('./routes/userRoutes');
+const exerciseRoutes = require('./routes/exerciseRoutes');
 
 const { searchFood, searchFoodNutrients, searchBrandedFoodItem, } = require('./controller/nutritionixController');
 
@@ -28,7 +29,7 @@ app.use(cors());
 app.use(cookieParser());
 
 // passport
-app.use(session({ secret: 'superSecret', resave: true, saveUninitialized: true }));
+app.use(session({ secret: process.env.SECRETORKEY, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -37,10 +38,12 @@ app.use(passport.session());
 app.use('/api/auth', authRoutes);
 app.use('/api/food', foodLogRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/exercise', exerciseRoutes);
 
 // nutritionix api routes
 app.use('/api/nutritionix/search', searchFood);
 app.use('/api/nutritionix/nutrients', searchFoodNutrients);
 app.use('/api/nutritionix/brand', searchBrandedFoodItem);
 
-app.listen(4000, () => console.log('Server is running...'));
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log('Server is running...'));

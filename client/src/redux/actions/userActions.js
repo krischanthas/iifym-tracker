@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { USER_SIGN_ON, UPDATED_USER_PROFILE, USER_PROFILE_FETCHED } from '../types';
-
+import { fetchExerciseLogs } from './exerciseActions';
 
 export const getCurrentUserProfile = () => dispatch => {
     axios
@@ -8,6 +8,7 @@ export const getCurrentUserProfile = () => dispatch => {
         .then(res => {
             dispatch({ type: USER_SIGN_ON, payload: res.data.profile.user });
             dispatch({ type: USER_PROFILE_FETCHED, payload: res.data.profile });
+            dispatch(fetchExerciseLogs());
         })
         .catch(err => console.log(err));
 }

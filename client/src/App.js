@@ -5,6 +5,7 @@ import './App.css';
 import {
   Switch,
   Route,
+  useLocation
 } from "react-router-dom";
 
 // components
@@ -28,20 +29,22 @@ import { getCurrentUserProfile } from './redux/actions/userActions';
 store.dispatch(getCurrentUserProfile());
 
 const App = () => {
+  const location = useLocation();
   return (
     <div className="App">
       <Provider store={store}>
-        <NavBar />
+        {location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/register" ? <NavBar /> : ''}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
-          <PrivateRoute exact path="/login" component={Login} />
-          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute path="/login" component={Login} />
+          <PrivateRoute path="/profile" component={Profile} />
           <Route path="/nix" component={SearchNutritionix} />
           <Route path="/exercise" component={Exercise} />
           <Route path="/history" component={MealHistory} />
           <Route path="/goals" component={Goals} />
         </Switch>
+
       </Provider>
     </div>
   );

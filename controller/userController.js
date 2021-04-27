@@ -1,7 +1,6 @@
 
 const LogModel = require('../models/FoodLogModel');
 const UserModel = require('../models/UserModel');
-
 module.exports.getUserProfile = async (req, res) => {
     try {
         // get current user
@@ -16,7 +15,6 @@ module.exports.getUserProfile = async (req, res) => {
             profile: {
                 user,
                 logs
-
             }
         });
 
