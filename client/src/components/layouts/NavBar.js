@@ -83,12 +83,6 @@ const NavBar = () => {
                         <ListItemText primary={'Search'} />
                     </ListItem>
                 </Link>
-                <Link to="/history" className={classes.links}>
-                    <ListItem button>
-                        <ListItemIcon><AssignmentIcon /></ListItemIcon>
-                        <ListItemText primary={'Meal History'} />
-                    </ListItem>
-                </Link>
 
                 <Link to="/exercise" className={classes.links}>
                     <ListItem button>
@@ -107,24 +101,10 @@ const NavBar = () => {
             </List>
             <Divider />
             <List>
-                <Link to="/account" className={classes.links}>
-                    <ListItem button>
-                        <ListItemIcon> <AccountCircleIcon /></ListItemIcon>
-                        <ListItemText primary={'Account'} />
-                    </ListItem>
-                </Link>
-
-                <ListItem button className={classes.links}>
-                    <ListItemIcon> <LiveHelpIcon /></ListItemIcon>
-                    <ListItemText primary={'iifym'} />
-                </ListItem>
-
                 <ListItem button onClick={() => dispatch(signOut())} className={classes.links}>
                     <ListItemIcon> <ExitToAppIcon /></ListItemIcon>
                     <ListItemText primary={'Sign Out'} />
                 </ListItem>
-
-
             </List>
         </div>
     );

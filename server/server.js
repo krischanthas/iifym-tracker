@@ -19,6 +19,8 @@ const { searchFood, searchFoodNutrients, searchBrandedFoodItem, } = require('./c
 
 dotenv.config();
 
+// const connectionString = 'mongodb://mongo:27017/iifym';
+
 // connect to db
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 ).then(() => console.log("Connected to MongoDB")).catch((error) => res.status(500).json({ message: error }));
